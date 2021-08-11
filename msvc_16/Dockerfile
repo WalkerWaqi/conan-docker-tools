@@ -17,6 +17,7 @@ RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.or
 RUN choco install --no-progress --yes visualstudio2019buildtools --version=16.10.4.0
 RUN choco install --no-progress --yes visualstudio2019-workload-vctools --version=1.0.1
 RUN choco install --no-progress --yes visualstudio2019-workload-manageddesktop --version=1.0.2
+RUN choco install --no-progress --yes windowsdriverkit10 --version=10.0.19041.685
 
 RUN python -m pip install win-unicode-console conan conan_package_tools --upgrade --force-reinstall --no-cache
 
@@ -30,3 +31,4 @@ RUN conan profile new default --detect; \
 WORKDIR "C:/Users/ContainerAdministrator"
 
 ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\VsDevCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]
+# ENTRYPOINT ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\VsMSBuildCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

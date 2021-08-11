@@ -1,0 +1,17 @@
+version: "2.2"
+
+services:
+  20h2-2019-conan:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: 20h2:2019-conan
+    container_name: 20h2-2019-conan
+    tty: true
+    working_dir: C:/Users/ContainerAdministrator
+
+  20h2-2019-msbuild:
+    extends:
+      service: 20h2-2019-conan
+    container_name: 20h2-2019-msbuild
+    entrypoint: ["C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools\\Common7\\Tools\\VsMSBuildCmd.bat", "&&", "powershell.exe", "-NoLogo", "-ExecutionPolicy", "Bypass"]

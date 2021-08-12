@@ -4,22 +4,19 @@ LABEL maintainer="Walker Waqi <walkerwaqi@qq.com>"
 
 SHELL ["powershell.exe", "-ExecutionPolicy", "Bypass", "-Command"]
 
-ENV chocolateyUseWindowsCompression=false \
-    PYTHONIOENCODING=UTF-8
+ENV chocolateyUseWindowsCompression=false
 
 RUN iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); \
     choco install --no-progress --yes git; \
     choco install --no-progress --yes git-lfs; \
     choco install --no-progress --yes svn; \
     choco install --no-progress --yes cmake --installargs 'ADD_CMAKE_TO_PATH=System'; \
-    choco install --no-progress --yes python3
+    choco install --no-progress --yes conan
 
 RUN choco install --no-progress --yes visualstudio2019buildtools --version=16.10.4.0
 RUN choco install --no-progress --yes visualstudio2019-workload-vctools --version=1.0.1
 RUN choco install --no-progress --yes visualstudio2019-workload-manageddesktop --version=1.0.2
 RUN choco install --no-progress --yes windowsdriverkit10 --version=10.0.19041.685
-
-RUN python -m pip install win-unicode-console conan conan_package_tools --upgrade --force-reinstall --no-cache
 
 RUN conan profile new default --detect; \
     conan remote clean; \
